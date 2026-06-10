@@ -1,14 +1,29 @@
-# Startup code for bare-metal aarch64
+[update-readmes]   Mode: rewrite — migrating to template structure...
+# aarch64-rt
 
-[![crates.io page](https://img.shields.io/crates/v/aarch64-rt.svg)](https://crates.io/crates/aarch64-rt)
-[![docs.rs page](https://docs.rs/aarch64-rt/badge.svg)](https://docs.rs/aarch64-rt)
+[![Built with Ona](https://ona.com/build-with-ona.svg)](https://app.ona.com/#https://github.com/Interested-Deving-1896/aarch64-rt)
 
-This crate provides entry point and exception handling for bare-metal Rust binaries on aarch64
-Cortex-A processors.
+<!-- AI:start:what-it-does -->
+_Description pending._
+<!-- AI:end:what-it-does -->
 
-This is not an officially supported Google product.
+## Architecture
+
+<!-- AI:start:architecture -->
+_Architecture documentation pending._
+<!-- AI:end:architecture -->
+
+## Install
+
+<!-- Add installation instructions here. This section is yours — the AI will not modify it. -->
+
+```bash
+git clone https://github.com/Interested-Deving-1896/aarch64-rt.git
+cd aarch64-rt
+```
 
 ## Usage
+
 
 Use the `entry!` macro to mark your main function:
 
@@ -44,75 +59,50 @@ fn main() {
 }
 ```
 
-## Features
+## Configuration
 
-`exceptions`, `initial-pagetable` and `psci` are enabled by default.
+<!-- Document configuration options here. This section is yours — the AI will not modify it. -->
 
-### `el1`
+## CI
 
-If the `exceptions` feature is also enabled then uses `vbar_el1` for the exception vector. If
-`initial-pagetable` is also enabled then uses `ttbr0_el1` for the page table, and other EL1 MMU
-configuration registers.
+<!-- AI:start:ci -->
+_CI documentation pending._
+<!-- AI:end:ci -->
 
-### `el2`
+## Mirror chain
 
-If the `exceptions` feature is also enabled then uses `vbar_el2` for the exception vector. If
-`initial-pagetable` is also enabled then uses `ttbr0_el2` for the page table, and other EL2 MMU
-configuration registers.
+<!-- AI:start:mirror-chain -->
+This repo is maintained in [`Interested-Deving-1896/aarch64-rt`](https://github.com/Interested-Deving-1896/aarch64-rt) and mirrored through:
 
-### `el3`
-
-If the `exceptions` feature is also enabled then uses `vbar_el3` for the exception vector. If
-`initial-pagetable` is also enabled then uses `ttbr0_el3` for the page table, and other EL3 MMU
-configuration registers.
-
-### `exceptions`
-
-Provides an exception vector table, and sets it in the appropriate `vbar` system register for the
-selected exception level. You must provide handlers for each exception by implementing the
-`ExceptionHandlers` trait and then calling the `exception_handlers!` macro. All methods on
-`ExceptionHandlers` have a default implementation which simply panics, so the simplest
-implementation looks like this:
-
-```rust
-exception_handlers!(Exceptions);
-
-struct Exceptions;
-
-impl ExceptionHandlers for Exceptions {}
+```
+Interested-Deving-1896/aarch64-rt  ──►  OpenOS-Project-OSP/aarch64-rt  ──►  OpenOS-Project-Ecosystem-OOC/aarch64-rt
 ```
 
-### `initial-pagetable`
+Changes flow downstream automatically via the hourly mirror chain in
+[`fork-sync-all`](https://github.com/Interested-Deving-1896/fork-sync-all).
+Direct commits to OSP or OOC are detected and opened as PRs back to `Interested-Deving-1896`.
+<!-- AI:end:mirror-chain -->
 
-Sets an initial pagetable in the appropriate TTBR and enables the MMU and cache before running any
-Rust code or writing to any memory.
+## Contributors
 
-This is especially important if running at EL1 in a VM, as accessing memory with the cache disabled
-while the hypervisor or host has cacheable aliases to the same memory can lead to cache coherency
-issues. Even if the host doesn't explicitly access the memory, speculative accesses can lead to
-cache fills.
+<!-- AI:start:contributors -->
+_Contributors pending._
+<!-- AI:end:contributors -->
 
-This may be combined with one of the `elX` features to set up the page table for that exception
-level. If not, the exception level will be checked at runtime and the corresponding system registers
-used.
+## Origins
 
-### `psci`
+<!-- AI:start:origins -->
+_Original project — no upstream fork._
+<!-- AI:end:origins -->
 
-Adds the `start_core` function to start another CPU core via a PSCI `CPU_ON` call. This adds a
-dependency on the `smccc` crate.
+## Resources
+
+<!-- AI:start:resources -->
+_No additional resource files found._
+<!-- AI:end:resources -->
 
 ## License
 
-Licensed under either of
-
-- Apache License, Version 2.0
-  ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
-- MIT license
-  ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
-
-at your option.
-
-## Contributing
-
-If you want to contribute to the project, see details of
-[how we accept contributions](CONTRIBUTING.md).
+<!-- AI:start:license -->
+<!-- License not detected — add a LICENSE file to this repo. -->
+<!-- AI:end:license -->
